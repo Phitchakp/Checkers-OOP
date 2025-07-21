@@ -1,3 +1,6 @@
+from board import Board
+from player import Player
+
 class Match:
     def __init__(self):
         self.board = Board()
@@ -59,33 +62,29 @@ class Match:
                     for i, path in enumerate(captures):
                         print(f"{i + 1}: {path}")
                     choice = int(input("Select capture path number: ")) - 1
-                    for next_pos in captures[choice]:
+                    full_path = captures[choice]
+                    for next_pos in full_path:
                         mid_row = (piece.position[0] + next_pos[0]) // 2
                         mid_col = (piece.position[1] + next_pos[1]) // 2
                         self.board.grid[mid_row][mid_col] = None
                         self.board.move_piece(piece, next_pos)
 
-                        # After full path, check for additional captures (e.g., after becoming king)
+                    # Continue capturing after king promotion
                     while True:
                         new_captures = self.board.get_all_captures(piece)
                         if new_captures:
-                            print("Continuing multiple captures with new king...")
-                            next_path = new_captures[0]  # default: follow first path
-                            for next_pos in next_path:
+                            print(f"Continuing captures as king... Options: {new_captures}")
+                            extra_path = new_captures[0]
+                            full_path.extend(extra_path)
+                            for next_pos in extra_path:
                                 mid_row = (piece.position[0] + next_pos[0]) // 2
                                 mid_col = (piece.position[1] + next_pos[1]) // 2
                                 self.board.grid[mid_row][mid_col] = None
                                 self.board.move_piece(piece, next_pos)
                         else:
                             break
-                        # After each move, check for further captures (especially if kinged)
-                        new_captures = self.board.get_all_captures(piece)
-                        if new_captures:
-                            print("Continuing multiple captures with new king...")
-                            captures = new_captures
-                            choice = 0  # default to first path
-                        else:
-                            break
+
+                    print(f"Full capture path executed: {full_path}")
                     return True
                 else:
                     raw_dest = input("Enter destination position (row col or type 'GG' to quit): ")
@@ -103,17 +102,3 @@ class Match:
 
     def switch_turn(self):
         self.current_player_index = 1 - self.current_player_index
-
-
-class Checkers:
-    def __init__(self):
-        self.match = Match()
-
-    def run(self):
-        self.match.start_game()
-
-
-if __name__ == "__main__":
-    game = Checkers()
-    game.run()
-       
