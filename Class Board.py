@@ -1,3 +1,5 @@
+from pieces import Man
+
 class Board:
     def __init__(self):
         self.grid = [[None for _ in range(8)] for _ in range(8)]
@@ -34,7 +36,7 @@ class Board:
             mid_row = (start_row + end_row) // 2
             mid_col = (start_col + end_col) // 2
             self.grid[mid_row][mid_col] = None
-            return True  # Captured
+            return True
         return False
 
     def get_valid_moves(self, piece):
@@ -97,6 +99,4 @@ class Board:
                 else:
                     row_str += 'Lk ' if piece.is_king else 'L '
             print(row_str)
-        self.highlight_positions = []  # Clear after display
-
-        
+        self.highlight_positions = []
