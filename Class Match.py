@@ -102,3 +102,4 @@ class Match:
 
     def switch_turn(self):
         self.current_player_index = 1 - self.current_player_index
+
