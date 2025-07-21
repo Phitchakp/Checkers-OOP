@@ -8,5 +8,3 @@ class Player:
 
     def get_pieces_with_captures(self, board):
         return [p for p in self.pieces if board.get_all_captures(p)]
-    
-    
