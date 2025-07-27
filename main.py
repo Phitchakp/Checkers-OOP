@@ -1,4 +1,4 @@
-from match import Match
+from match import Match                     
 
 class Checkers:
     def __init__(self):
