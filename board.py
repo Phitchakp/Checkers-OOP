@@ -39,8 +39,8 @@ class Board:
             return True
         return False
 
-    def get_valid_moves(self, piece):
-        return self.get_all_captures(piece) or self.get_simple_moves(piece)
+    def get_valid_moves(self, piece):                       # Polymorrphism from pieces
+        return self.get_simple_moves(piece) or self.get_all_captures(piece)
 
     def get_simple_moves(self, piece):
         moves = []
