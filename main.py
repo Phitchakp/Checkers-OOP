@@ -1,11 +1,11 @@
-from match import Match
+from match import Match                     
 
 class Checkers:
     def __init__(self):
-        self.match = Match()
+        self.match = Match()                # from class Match
 
-    def run(self):
-        self.match.start_game()
+    def run(self):                          
+        self.match.start_game()             # start game from Match
 
 if __name__ == "__main__":
     game = Checkers()

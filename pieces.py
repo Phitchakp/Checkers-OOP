@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class Piece(ABC):
+class Piece(ABC):                                       # Inheritance, Polymorphism
     def __init__(self, color, position):
         self.color = color
         self.position = position
